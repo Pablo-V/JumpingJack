@@ -1,2 +1,5 @@
-# JumpingJack
-Videojuego de plataformas en 2D
+# Jumping Jack
+Controles:
+- A: Izquierda
+- D: Derecha
+- Espacio: Salto
