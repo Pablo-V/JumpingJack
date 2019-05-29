@@ -1,4 +1,4 @@
-# jumping-jack
+# Jumping Jack
 #### Controles:
 - A: Izquierda
 - D: Derecha
