@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="6" nextobjectid="179">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="8" nextobjectid="193">
  <tileset firstgid="1" name="TileSet" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
   <image source="tiles_spritesheet.png" width="914" height="936"/>
  </tileset>
@@ -10,7 +10,7 @@
  </layer>
  <layer id="1" name="Frente" width="150" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmU0KwjAQRrNUXIu4FFcuPIB7Xbj0FvUILl17AX8uawIWSlCZZGaatPM9+Ci1NI3TR5qmzgEuF+IWAAAAGBMHn11CtmW6CQbCqfD5YFxI+wC/bKN9/+EXAIBDmJP3Pc8ucU0AgAwrnyYz50477XrAlvBbLeNF3Bfqf7g6eo2mSn2vmeDU3OeRGctQa3R3ttziOvXyuRnOK6FWVtziOtV6NTGcFK8suCXhFLxK92rMbkk5Ba/yvBqjW5JOwat8r7TdOn62y2hfg/BeLOlU65X1cOoX3Oqu0wyZoXgF0tiU7oCr3ytAp8lId4yM13f/HYvz7Tleq1cW4XzvyLlvMdRj1DlibV5ZRPpdqk+vtNyCUzxKOCXtlYZbcCofybVpzXpT23z6zBjn49nHZ+2zcPXUfNlJTEq7v9wC+pR2Smu8glvlqMEpba/gVr/U4lRfCW7tEfVYcgoZft55ZN/p
+   eJztmT1uwkAQRrckSh0hSpSKggPQkyIltyBHSJk6FyBwWXalWLJWBs3+jL32vCd9wmB5WYansb12DgAAAKCc74EAAADMndOD7cCHz0GQfcKYAAAphD4U95glficA1GHrc87MV2+c7hpoL/islX4Rz0X6G36cvEYvSnNvmeDUm89fZiwjrdHF2XKr1Kmbz6/h3BJqZcWtUqc6r1aGk+KVBbdqOIVX6V4t2a1aTuFVnldLdKumU3iV75W2W5//r5vovQbhvrimU51X1lNSv+BWf51mzszFK0hjN/UEXPtegZxzRvo9Ml7ffbYvztB5vFWvLFLyvCPnf4uR7pNeI7bmlUVq30uN6ZWWWzhVxhRO1fZKwy2cyqfm2rRmvaVjXn1eC47n3FfOu8/atVPzTS8xKeM+cgv0mdoprX6FW9PRglPaXuHWuLTi1FgJbh2Jeiw5ReafO9GJ3tU=
   </data>
  </layer>
  <objectgroup id="2" name="Terreno">
@@ -66,29 +66,32 @@
   <object id="161" x="4690" y="700" width="139.333" height="40"/>
   <object id="162" x="4900" y="560" width="140" height="40"/>
   <object id="163" x="5110" y="420" width="70" height="40"/>
-  <object id="164" x="5250" y="350" width="70" height="39.3333"/>
-  <object id="165" x="5390" y="280" width="70" height="40.6667"/>
-  <object id="166" x="5530" y="210" width="910" height="40"/>
-  <object id="167" x="6510" y="280" width="70.6667" height="40"/>
-  <object id="168" x="6650" y="350" width="68" height="40.6667"/>
   <object id="169" x="6790" y="420" width="70" height="40"/>
   <object id="170" x="6930" y="560" width="140" height="40"/>
   <object id="171" x="7140" y="700" width="138.667" height="40"/>
   <object id="172" x="7420" y="700" width="210" height="39.3333"/>
   <object id="173" x="7770" y="700" width="210.667" height="38.6667"/>
   <object id="178" x="3780" y="1050" width="4410" height="140"/>
+  <object id="192" x="0" y="0" width="10500" height="70"/>
  </objectgroup>
- <objectgroup id="4" name="Objetos">
+ <objectgroup id="4" name="Bloques">
   <object id="63" x="350" y="1190" width="70" height="70"/>
-  <object id="64" x="490" y="1190" width="70" height="70"/>
   <object id="65" x="630" y="1190" width="70" height="70"/>
+  <object id="189" x="5320" y="420" width="70.6667" height="38.6667"/>
+  <object id="190" x="5600" y="420" width="769.333" height="38.6667"/>
+  <object id="191" x="6580" y="420" width="69.3333" height="40"/>
+ </objectgroup>
+ <objectgroup id="7" name="Sorpresas">
+  <object id="64" x="490" y="1190" width="70" height="70"/>
   <object id="66" x="1190" y="1750" width="70" height="70"/>
   <object id="67" x="1260" y="1750" width="70" height="70"/>
   <object id="68" x="1330" y="1750" width="70" height="70"/>
-  <object id="69" x="5670" y="0" width="70" height="70"/>
-  <object id="70" x="5810" y="0" width="70" height="70"/>
-  <object id="71" x="5950" y="0" width="70" height="70"/>
-  <object id="72" x="6090" y="0" width="70" height="70"/>
-  <object id="73" x="6230" y="0" width="70" height="70"/>
+ </objectgroup>
+ <objectgroup id="6" name="Monedas">
+  <object id="184" x="5810" y="210" width="70" height="70"/>
+  <object id="185" x="5880" y="210" width="70" height="70"/>
+  <object id="186" x="5950" y="210" width="70" height="70"/>
+  <object id="187" x="6020" y="210" width="70" height="70"/>
+  <object id="188" x="6090" y="210" width="70" height="70"/>
  </objectgroup>
 </map>
