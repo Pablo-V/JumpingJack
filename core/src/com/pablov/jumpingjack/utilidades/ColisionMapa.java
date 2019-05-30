@@ -24,7 +24,7 @@ public class ColisionMapa {
         //Obtener objetos rectangulares de capa Terreno
         for (MapObject objeto : mapa.getLayers().get("Terreno").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) objeto).getRectangle();
-            new Moneda(mundo, mapa, rect);
+            new Bloque(mundo, mapa, rect);
         }
 
         //Obtener objetos moneda de capas Sorpesas y Monedas

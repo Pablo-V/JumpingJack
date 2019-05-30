@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolygonMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -32,6 +33,7 @@ import com.pablov.jumpingjack.utilidades.ColisionMapa;
 
 public class Pantalla implements Screen {
     private Juego juego;
+    private TextureAtlas atlas;
     private OrthographicCamera camara;
     private Viewport puerto;
     private Hud hud;
@@ -48,6 +50,7 @@ public class Pantalla implements Screen {
     private Box2DDebugRenderer b2dr;
 
     public Pantalla(Juego juego) {
+        atlas = new TextureAtlas("Jack-Enemigos.pack");
         this.juego = juego;
         camara = new OrthographicCamera();
         puerto = new FitViewport(Juego.ANCHO_V / Juego.PPM, Juego.ALTO_V / Juego.PPM, camara);
@@ -60,12 +63,16 @@ public class Pantalla implements Screen {
         camara.position.set(puerto.getWorldWidth() / 2 / Juego.PPM, 700 / Juego.PPM, 0);
 
         mundo = new World(new Vector2(0, -17), true);
-        jugador = new Jack(mundo);
+        jugador = new Jack(mundo, this);
         b2dr = new Box2DDebugRenderer();
 
         new ColisionMapa(mundo, mapa);
 
         fpsLogger = new FPSLogger();
+    }
+
+    public TextureAtlas getAtlas() {
+        return atlas;
     }
 
     @Override
@@ -87,6 +94,8 @@ public class Pantalla implements Screen {
 
         mundo.step(1 / 60f, 8, 3);
 
+        jugador.actualizar(delta);
+
         camara.position.x = jugador.cuerpo.getPosition().x;
         camara.position.y = jugador.cuerpo.getPosition().y;
 
@@ -107,8 +116,12 @@ public class Pantalla implements Screen {
 
         b2dr.render(mundo, camara.combined);
 
-        juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
+        juego.batch.setProjectionMatrix(camara.combined);
+        juego.batch.begin();
+        jugador.draw(juego.batch);
+        juego.batch.end();
         hud.escenario.draw();
+        juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
     }
 
     @Override
