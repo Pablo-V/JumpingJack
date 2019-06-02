@@ -1,11 +1,23 @@
 package com.pablov.jumpingjack.entidades;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.World;
+import com.pablov.jumpingjack.Juego;
+import com.pablov.jumpingjack.escenas.Hud;
+import com.pablov.jumpingjack.pantallas.Pantalla;
 
 public class Bloque extends ObjetoInteractivo {
-    public Bloque(World mundo, TiledMap mapa, Rectangle bordes) {
-        super(mundo, mapa, bordes);
+    public Bloque(Pantalla pantalla, Rectangle bordes) {
+        super(pantalla, bordes);
+        fijacion.setUserData(this);
+        setFiltroCategoria(Juego.BIT_BLOQUE);
+    }
+
+    @Override
+    public void golpeCabeza() {
+        Gdx.app.log("Bloque", "Colision");
+        setFiltroCategoria(Juego.BIT_DESTRUIDO);
+        getCelda().setTile(null);
+        Hud.anadirPuntos(100);
     }
 }

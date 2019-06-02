@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -27,9 +28,9 @@ public class Jack extends Sprite {
     private float tiempoEstado;
     private boolean correrDerecha;
 
-    public Jack(World mundo, Pantalla pantalla) {
+    public Jack(Pantalla pantalla) {
         super(pantalla.getAtlas().findRegion("jack"));
-        this.mundo = mundo;
+        this.mundo = pantalla.getMundo();
         estadoActual = State.PARAR;
         estadoAnterior = State.PARAR;
         tiempoEstado = 0;
@@ -109,16 +110,26 @@ public class Jack extends Sprite {
         defCuerpo.position.set(70 / Juego.PPM, 770 / Juego.PPM);
         defCuerpo.type = BodyDef.BodyType.DynamicBody;
         cuerpo = mundo.createBody(defCuerpo);
-        FixtureDef fijacion = new FixtureDef();
+
+        FixtureDef defFijacion = new FixtureDef();
         CircleShape circulo1 = new CircleShape();
         CircleShape circulo2 = new CircleShape();
+
+        defFijacion.filter.categoryBits = Juego.BIT_JACK;
+        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA | Juego.BIT_BLOQUE;
         circulo1.setRadius(33 / Juego.PPM);
         circulo1.setPosition(new Vector2(0, -13 / Juego.PPM));
-        fijacion.shape = circulo1;
-        cuerpo.createFixture(fijacion);
+        defFijacion.shape = circulo1;
+        cuerpo.createFixture(defFijacion);
         circulo2.setRadius(33 / Juego.PPM);
         circulo2.setPosition(new Vector2(0, 13 / Juego.PPM));
-        fijacion.shape = circulo2;
-        cuerpo.createFixture(fijacion);
+        defFijacion.shape = circulo2;
+        cuerpo.createFixture(defFijacion);
+
+        EdgeShape cabeza = new EdgeShape();
+        cabeza.set(new Vector2(-15 / Juego.PPM, 47 / Juego.PPM), new Vector2(15 / Juego.PPM, 47 / Juego.PPM));
+        defFijacion.shape = cabeza;
+        defFijacion.isSensor = true;
+        cuerpo.createFixture(defFijacion).setUserData("cabeza");
     }
 }

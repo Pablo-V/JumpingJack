@@ -29,6 +29,7 @@ import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.entidades.Jack;
 import com.pablov.jumpingjack.escenas.Hud;
 import com.pablov.jumpingjack.utilidades.ColisionMapa;
+import com.pablov.jumpingjack.utilidades.DetectorContactoMundo;
 //import com.pablov.jumpingjack.personajes.Jack;
 
 public class Pantalla implements Screen {
@@ -63,10 +64,14 @@ public class Pantalla implements Screen {
         camara.position.set(puerto.getWorldWidth() / 2 / Juego.PPM, 700 / Juego.PPM, 0);
 
         mundo = new World(new Vector2(0, -17), true);
-        jugador = new Jack(mundo, this);
+
         b2dr = new Box2DDebugRenderer();
 
-        new ColisionMapa(mundo, mapa);
+        new ColisionMapa(this);
+
+        jugador = new Jack(this);
+
+        mundo.setContactListener(new DetectorContactoMundo());
 
         fpsLogger = new FPSLogger();
     }
@@ -95,6 +100,7 @@ public class Pantalla implements Screen {
         mundo.step(1 / 60f, 8, 3);
 
         jugador.actualizar(delta);
+        hud.actualizar(delta);
 
         camara.position.x = jugador.cuerpo.getPosition().x;
         camara.position.y = jugador.cuerpo.getPosition().y;
@@ -127,6 +133,14 @@ public class Pantalla implements Screen {
     @Override
     public void resize(int width, int height) {
         puerto.update(width, height);
+    }
+
+    public TiledMap getMapa() {
+        return mapa;
+    }
+
+    public World getMundo() {
+        return mundo;
     }
 
     @Override

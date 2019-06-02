@@ -1,15 +1,28 @@
 package com.pablov.jumpingjack.entidades;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.pablov.jumpingjack.Juego;
+import com.pablov.jumpingjack.escenas.Hud;
+import com.pablov.jumpingjack.pantallas.Pantalla;
 
 public class Moneda extends ObjetoInteractivo {
-    public Moneda(World mundo, TiledMap mapa, Rectangle bordes) {
-        super(mundo, mapa, bordes);
+    private static TiledMapTileSet tileSet;
+    private final int MONEDA_VACIA = 109;
+    public Moneda(Pantalla pantalla, Rectangle bordes) {
+        super(pantalla, bordes);
+        tileSet = mapa.getTileSets().getTileSet("TileSet");
+        fijacion.setUserData(this);
+        setFiltroCategoria(Juego.BIT_MONEDA);
+    }
+
+    @Override
+    public void golpeCabeza() {
+        Gdx.app.log("Moneda", "Colision");
+        if (getCelda().getTile().getId() != MONEDA_VACIA) {
+            getCelda().setTile(tileSet.getTile(MONEDA_VACIA));
+            Hud.anadirPuntos(150);
+        }
     }
 }

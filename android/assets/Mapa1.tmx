@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="8" nextobjectid="193">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="9" nextobjectid="193">
  <tileset firstgid="1" name="TileSet" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
   <image source="tiles_spritesheet.png" width="914" height="936"/>
  </tileset>
  <layer id="5" name="Fondo" width="150" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0kEKgDAQA0Cf5Vf9rXjwpoLImtKdgVxLumRZAAAAAAAAAAAAAIDTNlEYQ3oHNjWf9A5m39RVr6fOX/4xyg3SO5h9U4c/dzWC9A46bOpOVff0LdI76Lap9UWq3pWaJFX2TN+1c9Kqu6bv2zEj+KNv+s6dAtDZDqK8G8k=
+   eJzt0rENgDAQA0DGYlW2RRR0EClFcMjfSW4j5+VtAwAAAAAAAAAAAABux0JhDukd2NR60jtYfVNPvVqdZ/1Hj/QOVt/Updqu0juosKk3f+7ekt5BtU3tHRn1roxJ0sie6btWTtrorun7VswMvuibvnOlAFR2AvJqGpc=
   </data>
  </layer>
  <layer id="1" name="Frente" width="150" height="30">
