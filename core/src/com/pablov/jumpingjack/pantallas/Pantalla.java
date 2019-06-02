@@ -50,7 +50,7 @@ public class Pantalla implements Screen {
     private Box2DDebugRenderer b2dr;
 
     public Pantalla(Juego juego) {
-        atlas = new TextureAtlas("Jack-Enemigos.pack");
+        atlas = new TextureAtlas("jack.pack");
         this.juego = juego;
         camara = new OrthographicCamera();
         puerto = new FitViewport(Juego.ANCHO_V / Juego.PPM, Juego.ALTO_V / Juego.PPM, camara);
@@ -120,8 +120,8 @@ public class Pantalla implements Screen {
         juego.batch.begin();
         jugador.draw(juego.batch);
         juego.batch.end();
-        hud.escenario.draw();
         juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
+        hud.escenario.draw();
     }
 
     @Override
