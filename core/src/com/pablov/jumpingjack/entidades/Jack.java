@@ -31,7 +31,7 @@ public class Jack extends Sprite {
     private boolean jackMuerto;
 
     public Jack(Pantalla pantalla) {
-        super(pantalla.getAtlas().findRegion("jack"));
+        super(pantalla.getAtlas().findRegion("jack/jack_para"));
         this.mundo = pantalla.getMundo();
         estadoActual = State.PARAR;
         estadoAnterior = State.PARAR;
@@ -125,13 +125,13 @@ public class Jack extends Sprite {
         CircleShape circulo2 = new CircleShape();
 
         defFijacion.filter.categoryBits = Juego.BIT_JACK;
-        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA | Juego.BIT_BLOQUE | Juego.BIT_OBJETO;
+        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA | Juego.BIT_BLOQUE | Juego.BIT_OBJETO | Juego.BIT_ENEMIGO;
         circulo1.setRadius(33 / Juego.PPM);
-        circulo1.setPosition(new Vector2(0, -13 / Juego.PPM));
+        circulo1.setPosition(new Vector2(0 / Juego.PPM, -13 / Juego.PPM));
         defFijacion.shape = circulo1;
         cuerpo.createFixture(defFijacion).setUserData("piernas");
         circulo2.setRadius(33 / Juego.PPM);
-        circulo2.setPosition(new Vector2(0, 13 / Juego.PPM));
+        circulo2.setPosition(new Vector2(0 / Juego.PPM, 13 / Juego.PPM));
         defFijacion.shape = circulo2;
         cuerpo.createFixture(defFijacion).setUserData("torso");
 

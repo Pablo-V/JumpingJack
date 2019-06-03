@@ -18,6 +18,7 @@ import com.pablov.jumpingjack.entidades.ObjetoInteractivo;
 public class DetectorContactoMundo implements ContactListener {
     @Override
     public void beginContact(Contact contact) {
+        Gdx.app.log("contacto", "si");
         Fixture fijacionA = contact.getFixtureA();
         Fixture fijacionB = contact.getFixtureB();
 

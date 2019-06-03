@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.entidades.Jack;
+import com.pablov.jumpingjack.entidades.Raton;
 import com.pablov.jumpingjack.escenas.Hud;
 import com.pablov.jumpingjack.utilidades.ColisionMapa;
 import com.pablov.jumpingjack.utilidades.DetectorContactoMundo;
@@ -28,6 +29,7 @@ public class Pantalla implements Screen {
     private Viewport puerto;
     private Hud hud;
     public Jack jugador;
+    private Raton raton;
     FPSLogger fpsLogger;
 
     //Variables mapa .tmx
@@ -40,7 +42,7 @@ public class Pantalla implements Screen {
     private Box2DDebugRenderer b2dr;
 
     public Pantalla(Juego juego) {
-        atlas = new TextureAtlas("jack.pack");
+        atlas = new TextureAtlas("entidades.pack");
         this.juego = juego;
         camara = new OrthographicCamera();
         puerto = new FitViewport(Juego.ANCHO_V / Juego.PPM, Juego.ALTO_V / Juego.PPM, camara);
@@ -63,6 +65,8 @@ public class Pantalla implements Screen {
         mundo.setContactListener(new DetectorContactoMundo());
 
         fpsLogger = new FPSLogger();
+
+        raton = new Raton(this, 70 / Juego.PPM, 770 / Juego.PPM);
     }
 
     public TextureAtlas getAtlas() {
@@ -75,7 +79,7 @@ public class Pantalla implements Screen {
     }
 
     public void gestionarEntrada(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jugador.cuerpo.getLinearVelocity().y == 0)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (jugador.cuerpo.getLinearVelocity().y > -0.3f && jugador.cuerpo.getLinearVelocity().y < 0.3f))
             jugador.cuerpo.applyLinearImpulse(new Vector2(0, 11f), jugador.cuerpo.getWorldCenter(), true);
         if (Gdx.input.isKeyPressed(Input.Keys.D) && jugador.cuerpo.getLinearVelocity().x <= 5)
             jugador.cuerpo.applyLinearImpulse(new Vector2(0.5f, 0), jugador.cuerpo.getWorldCenter(), true);
@@ -89,6 +93,7 @@ public class Pantalla implements Screen {
         mundo.step(1 / 60f, 8, 3);
 
         jugador.actualizar(delta);
+        raton.actualizar(delta);
         hud.actualizar(delta);
 
         camara.position.x = jugador.cuerpo.getPosition().x;
@@ -114,6 +119,7 @@ public class Pantalla implements Screen {
         juego.batch.setProjectionMatrix(camara.combined);
         juego.batch.begin();
         jugador.draw(juego.batch);
+        raton.draw(juego.batch);
         juego.batch.end();
         juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
         hud.escenario.draw();

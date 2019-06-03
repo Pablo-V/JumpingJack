@@ -1,0 +1,115 @@
+
+jack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+jack/jack_nada2
+  rotate: false
+  xy: 1, 1
+  size: 70, 97
+  orig: 70, 97
+  offset: 0, 0
+  index: -1
+jack/jack_camina3
+  rotate: false
+  xy: 73, 2
+  size: 70, 96
+  orig: 70, 96
+  offset: 0, 0
+  index: -1
+jack/jack_nada1
+  rotate: false
+  xy: 145, 3
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+jack/jack_camina2
+  rotate: false
+  xy: 216, 5
+  size: 68, 93
+  orig: 68, 93
+  offset: 0, 0
+  index: -1
+jack/jack_golpe
+  rotate: false
+  xy: 286, 6
+  size: 69, 92
+  orig: 69, 92
+  offset: 0, 0
+  index: -1
+jack/jack_salto
+  rotate: false
+  xy: 357, 5
+  size: 67, 93
+  orig: 67, 93
+  offset: 0, 0
+  index: -1
+jack/jack_camina1
+  rotate: false
+  xy: 426, 6
+  size: 66, 92
+  orig: 66, 92
+  offset: 0, 0
+  index: -1
+jack/jack_escala1
+  rotate: false
+  xy: 494, 6
+  size: 66, 92
+  orig: 66, 92
+  offset: 0, 0
+  index: -1
+jack/jack_escala2
+  rotate: false
+  xy: 562, 6
+  size: 66, 92
+  orig: 66, 92
+  offset: 0, 0
+  index: -1
+jack/jack_para
+  rotate: false
+  xy: 630, 6
+  size: 66, 92
+  orig: 66, 92
+  offset: 0, 0
+  index: -1
+jack/jack_agacha
+  rotate: false
+  xy: 698, 27
+  size: 69, 71
+  orig: 69, 71
+  offset: 0, 0
+  index: -1
+
+raton.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+raton/raton_golpe
+  rotate: false
+  xy: 1, 1
+  size: 59, 35
+  orig: 59, 35
+  offset: 0, 0
+  index: -1
+raton/raton_muere
+  rotate: false
+  xy: 62, 1
+  size: 59, 35
+  orig: 59, 35
+  offset: 0, 0
+  index: -1
+raton/raton_para
+  rotate: false
+  xy: 123, 1
+  size: 59, 35
+  orig: 59, 35
+  offset: 0, 0
+  index: -1
+raton/raton_mueve
+  rotate: false
+  xy: 184, 1
+  size: 58, 35
+  orig: 58, 35
+  offset: 0, 0
+  index: -1
