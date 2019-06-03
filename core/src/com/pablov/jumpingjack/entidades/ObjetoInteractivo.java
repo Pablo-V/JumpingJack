@@ -40,6 +40,9 @@ public abstract class ObjetoInteractivo {
     }
 
     public abstract void golpeCabeza();
+
+    public abstract void tocarPies();
+
     public void setFiltroCategoria(short bitFiltro) {
         Filter filtro = new Filter();
         filtro.categoryBits = bitFiltro;

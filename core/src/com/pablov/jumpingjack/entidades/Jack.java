@@ -15,7 +15,7 @@ import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.pantallas.Pantalla;
 
 public class Jack extends Sprite {
-    public enum State {CAER, SALTAR, PARAR, CORRER}
+    public enum State {CAER, SALTAR, PARAR, CORRER, MORIR}
 
     public State estadoActual;
     public State estadoAnterior;
@@ -25,8 +25,10 @@ public class Jack extends Sprite {
     private Animation<TextureRegion> jackCorrer;
     private Animation<TextureRegion> jackSaltar;
     private Animation<TextureRegion> jackCaer;
+    private Animation<TextureRegion> jackMorir;
     private float tiempoEstado;
     private boolean correrDerecha;
+    private boolean jackMuerto;
 
     public Jack(Pantalla pantalla) {
         super(pantalla.getAtlas().findRegion("jack"));
@@ -43,10 +45,13 @@ public class Jack extends Sprite {
         jackCorrer = new Animation(0.1f, fotogramas);
         fotogramas.clear();
         fotogramas.add(new TextureRegion(getTexture(), 357, 5, 67, 93));
-        jackSaltar  = new Animation(0.1f, fotogramas);
+        jackSaltar = new Animation(0.1f, fotogramas);
         fotogramas.clear();
-        fotogramas.add(new TextureRegion(getTexture(), 426, 6, 66, 92));
+        fotogramas.add(new TextureRegion(getTexture(), 73, 2, 70, 96));
         jackCaer = new Animation(0.1f, fotogramas);
+        fotogramas.clear();
+        fotogramas.add(new TextureRegion(getTexture(), 286, 6, 69, 92));
+        jackMorir = new Animation(0.1f, fotogramas);
         fotogramas.clear();
         definirJack();
         jackParado = new TextureRegion(getTexture(), 630, 6, 66, 92);
@@ -62,7 +67,10 @@ public class Jack extends Sprite {
     public TextureRegion getFotograma(float delta) {
         estadoActual = getEstado();
         TextureRegion region;
-        switch(estadoActual){
+        switch (estadoActual) {
+            case MORIR:
+                region = jackMorir.getKeyFrame(tiempoEstado);
+                break;
             case SALTAR:
                 region = jackSaltar.getKeyFrame(tiempoEstado);
                 break;
@@ -70,18 +78,17 @@ public class Jack extends Sprite {
                 region = jackCorrer.getKeyFrame(tiempoEstado, true);
                 break;
             case CAER:
-                region = jackCorrer.getKeyFrame(tiempoEstado);
+                region = jackCaer.getKeyFrame(tiempoEstado);
                 break;
             case PARAR:
             default:
                 region = jackParado;
                 break;
         }
-        if((cuerpo.getLinearVelocity().x < 0 || !correrDerecha) && !region.isFlipX()) {
+        if ((cuerpo.getLinearVelocity().x < 0 || !correrDerecha) && !region.isFlipX()) {
             region.flip(true, false);
             correrDerecha = false;
-        }
-        else if((cuerpo.getLinearVelocity().x > 0 || correrDerecha) && region.isFlipX()) {
+        } else if ((cuerpo.getLinearVelocity().x > 0 || correrDerecha) && region.isFlipX()) {
             region.flip(true, false);
             correrDerecha = true;
         }
@@ -95,6 +102,8 @@ public class Jack extends Sprite {
     }
 
     public State getEstado() {
+        if (jackMuerto)
+            return State.MORIR;
         if (cuerpo.getLinearVelocity().y > 0 || (cuerpo.getLinearVelocity().y < 0 && estadoAnterior == State.SALTAR))
             return State.SALTAR;
         else if (cuerpo.getLinearVelocity().y < 0)
@@ -116,20 +125,26 @@ public class Jack extends Sprite {
         CircleShape circulo2 = new CircleShape();
 
         defFijacion.filter.categoryBits = Juego.BIT_JACK;
-        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA | Juego.BIT_BLOQUE;
+        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA | Juego.BIT_BLOQUE | Juego.BIT_OBJETO;
         circulo1.setRadius(33 / Juego.PPM);
         circulo1.setPosition(new Vector2(0, -13 / Juego.PPM));
         defFijacion.shape = circulo1;
-        cuerpo.createFixture(defFijacion);
+        cuerpo.createFixture(defFijacion).setUserData("piernas");
         circulo2.setRadius(33 / Juego.PPM);
         circulo2.setPosition(new Vector2(0, 13 / Juego.PPM));
         defFijacion.shape = circulo2;
-        cuerpo.createFixture(defFijacion);
+        cuerpo.createFixture(defFijacion).setUserData("torso");
 
         EdgeShape cabeza = new EdgeShape();
-        cabeza.set(new Vector2(-15 / Juego.PPM, 47 / Juego.PPM), new Vector2(15 / Juego.PPM, 47 / Juego.PPM));
+        cabeza.set(new Vector2(-15 / Juego.PPM, 46 / Juego.PPM), new Vector2(15 / Juego.PPM, 46 / Juego.PPM));
         defFijacion.shape = cabeza;
         defFijacion.isSensor = true;
         cuerpo.createFixture(defFijacion).setUserData("cabeza");
+
+        EdgeShape pies = new EdgeShape();
+        pies.set(new Vector2(-20 / Juego.PPM, -48 / Juego.PPM), new Vector2(20 / Juego.PPM, -48 / Juego.PPM));
+        defFijacion.shape = pies;
+        defFijacion.isSensor = true;
+        cuerpo.createFixture(defFijacion).setUserData("pies");
     }
 }

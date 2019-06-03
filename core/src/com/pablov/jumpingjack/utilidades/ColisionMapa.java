@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.entidades.Bloque;
 import com.pablov.jumpingjack.entidades.Moneda;
+import com.pablov.jumpingjack.entidades.Muelle;
 import com.pablov.jumpingjack.entidades.Sorpresa;
 import com.pablov.jumpingjack.pantallas.Pantalla;
 
@@ -72,5 +73,10 @@ public class ColisionMapa {
             cuerpo = mundo.createBody(defCuerpo);
             cuerpo.createFixture(forma, 1);
         }
+
+        //Obtener objeto muelle de capa Objetos
+        MapObject objeto = mapa.getLayers().get("Objetos").getObjects().get(0);
+        Rectangle rect = ((RectangleMapObject) objeto).getRectangle();
+        new Muelle(pantalla, rect);
     }
 }

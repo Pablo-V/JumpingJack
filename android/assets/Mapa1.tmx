@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="9" nextobjectid="193">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="10" nextobjectid="198">
  <tileset firstgid="1" name="TileSet" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
   <image source="tiles_spritesheet.png" width="914" height="936"/>
+ </tileset>
+ <tileset firstgid="157" name="Objetos" tilewidth="70" tileheight="70" spacing="2" tilecount="64" columns="8">
+  <image source="items_spritesheet.png" width="576" height="576"/>
  </tileset>
  <layer id="5" name="Fondo" width="150" height="30">
   <data encoding="base64" compression="zlib">
@@ -10,7 +13,7 @@
  </layer>
  <layer id="1" name="Frente" width="150" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmT1uwkAQRrckSh0hSpSKggPQkyIltyBHSJk6FyBwWXalWLJWBs3+jL32vCd9wmB5WYansb12DgAAAKCc74EAAADMndOD7cCHz0GQfcKYAAAphD4U95glficA1GHrc87MV2+c7hpoL/islX4Rz0X6G36cvEYvSnNvmeDUm89fZiwjrdHF2XKr1Kmbz6/h3BJqZcWtUqc6r1aGk+KVBbdqOIVX6V4t2a1aTuFVnldLdKumU3iV75W2W5//r5vovQbhvrimU51X1lNSv+BWf51mzszFK0hjN/UEXPtegZxzRvo9Ml7ffbYvztB5vFWvLFLyvCPnf4uR7pNeI7bmlUVq30uN6ZWWWzhVxhRO1fZKwy2cyqfm2rRmvaVjXn1eC47n3FfOu8/atVPzTS8xKeM+cgv0mdoprX6FW9PRglPaXuHWuLTi1FgJbh2Jeiw5ReafO9GJ3tU=
+   eJztmT1uwkAQRrcMoo4iyogqBQdITwpKbgFHoKTmAkk4Si7HroQlawXR7M/Ya8970icDFutleBrba+cAAAAAyjk9CAAAwNTZP3kd+PL5FGSTMCYAQAqhD8U9Zo7HBIA6vPscMnPsjdNdA20En7XSL+K5SH/D2clrtFCae8sEp159fjJjGWmNvp0tt0qduvpcDOeaUCsrbpU61Xn1YjgpXllwq4ZTeJXu1ZzdquUUXuV5NUe3ajqFV/leabu1u29X0XsNwn1xTac6r6ynpH7Brf46zZSZileQxsfYE3DtewVyDhnp98h4ffe/fXEencdb9coiJc87cv63GOk+6TVia15ZpPa91JBeabmFU2WM4VRtrzTcwql8aq5Na9ZbOuavz7Lg+5z7yln7vLl2ar7qJSZl3GdugT5jO6XVr3BrPFpwSurV332bMz5uDUcrTg2V4NaWqMeSU2T6uQG0ZN+Q
   </data>
  </layer>
  <objectgroup id="2" name="Terreno">
@@ -93,5 +96,8 @@
   <object id="186" x="5950" y="210" width="70" height="70"/>
   <object id="187" x="6020" y="210" width="70" height="70"/>
   <object id="188" x="6090" y="210" width="70" height="70"/>
+ </objectgroup>
+ <objectgroup id="9" name="Objetos">
+  <object id="197" x="1540" y="1908" width="68" height="52"/>
  </objectgroup>
 </map>

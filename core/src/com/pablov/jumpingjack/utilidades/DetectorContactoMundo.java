@@ -30,6 +30,16 @@ public class DetectorContactoMundo implements ContactListener {
                 ((ObjetoInteractivo) objeto.getUserData()).golpeCabeza();
             }
         }
+
+        if(fijacionA.getUserData() == "pies" || fijacionB.getUserData() == "pies") {
+            Fixture pies = fijacionA.getUserData() == "pies" ? fijacionA : fijacionB;
+            Fixture objeto = pies == fijacionA ? fijacionB : fijacionA;
+
+            // Si el objeto no es nulo y extiende de ObjetoInteractivo
+            if(objeto.getUserData() != null && ObjetoInteractivo.class.isAssignableFrom(objeto.getUserData().getClass())) {
+                ((ObjetoInteractivo) objeto.getUserData()).tocarPies();
+            }
+        }
     }
 
     @Override

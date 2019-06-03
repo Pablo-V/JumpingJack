@@ -7,30 +7,19 @@ import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.pablov.jumpingjack.Juego;
-//import com.pablov.jumpingjack.ColisionMapa;
 import com.pablov.jumpingjack.entidades.Jack;
 import com.pablov.jumpingjack.escenas.Hud;
 import com.pablov.jumpingjack.utilidades.ColisionMapa;
 import com.pablov.jumpingjack.utilidades.DetectorContactoMundo;
-//import com.pablov.jumpingjack.personajes.Jack;
 
 public class Pantalla implements Screen {
     private Juego juego;
@@ -38,7 +27,7 @@ public class Pantalla implements Screen {
     private OrthographicCamera camara;
     private Viewport puerto;
     private Hud hud;
-    private Jack jugador;
+    public Jack jugador;
     FPSLogger fpsLogger;
 
     //Variables mapa .tmx
@@ -86,7 +75,7 @@ public class Pantalla implements Screen {
     }
 
     public void gestionarEntrada(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && jugador.cuerpo.getLinearVelocity().y == 0)
             jugador.cuerpo.applyLinearImpulse(new Vector2(0, 11f), jugador.cuerpo.getWorldCenter(), true);
         if (Gdx.input.isKeyPressed(Input.Keys.D) && jugador.cuerpo.getLinearVelocity().x <= 5)
             jugador.cuerpo.applyLinearImpulse(new Vector2(0.5f, 0), jugador.cuerpo.getWorldCenter(), true);
@@ -133,6 +122,7 @@ public class Pantalla implements Screen {
     @Override
     public void resize(int width, int height) {
         puerto.update(width, height);
+        Gdx.app.log("Estado", "resize");
     }
 
     public TiledMap getMapa() {
@@ -145,21 +135,22 @@ public class Pantalla implements Screen {
 
     @Override
     public void pause() {
-
+        Gdx.app.log("Estado", "pause");
     }
 
     @Override
     public void resume() {
-
+        Gdx.app.log("Estado", "resume");
     }
 
     @Override
     public void hide() {
-
+        Gdx.app.log("Estado", "hide");
     }
 
     @Override
     public void dispose() {
+        Gdx.app.log("Estado", "dispose");
         mapa.dispose();
         mundo.dispose();
         renderer.dispose();

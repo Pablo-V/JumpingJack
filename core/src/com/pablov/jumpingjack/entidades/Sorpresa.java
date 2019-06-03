@@ -9,6 +9,7 @@ import com.pablov.jumpingjack.pantallas.Pantalla;
 
 public class Sorpresa extends ObjetoInteractivo {
     private static TiledMapTileSet tileSet;
+    //IMPORTANTE: LOS ID DE TILES SEGUN LIBGDX EMPIEZAN EN 1, NO EN 0 COMO HACE TILED!!!
     private final int SORPRESA_VACIA = 13;
     public Sorpresa(Pantalla pantalla, Rectangle bordes) {
         super(pantalla, bordes);
@@ -24,5 +25,10 @@ public class Sorpresa extends ObjetoInteractivo {
             getCelda().setTile(tileSet.getTile(SORPRESA_VACIA));
             Hud.anadirPuntos(200);
         }
+    }
+
+    @Override
+    public void tocarPies() {
+
     }
 }

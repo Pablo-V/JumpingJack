@@ -20,4 +20,9 @@ public class Bloque extends ObjetoInteractivo {
         getCelda().setTile(null);
         Hud.anadirPuntos(100);
     }
+
+    @Override
+    public void tocarPies() {
+
+    }
 }
