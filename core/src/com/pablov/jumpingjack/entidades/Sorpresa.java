@@ -23,7 +23,7 @@ public class Sorpresa extends ObjetoInteractivo {
         Gdx.app.log("Sorpresa", "Colision");
         if (getCelda().getTile().getId() != SORPRESA_VACIA) {
             getCelda().setTile(tileSet.getTile(SORPRESA_VACIA));
-            Hud.anadirPuntos(200);
+            Hud.anadirVidas(1);
         }
     }
 

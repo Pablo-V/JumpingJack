@@ -130,13 +130,13 @@ public class Jack extends Sprite {
                 Juego.BIT_CABEZA_ENEMIGO;
 
         circulo1.setRadius(33 / Juego.PPM);
-        circulo1.setPosition(new Vector2(0 / Juego.PPM, -13 / Juego.PPM));
+        circulo1.setPosition(new Vector2(0 / Juego.PPM, 13 / Juego.PPM));
         defFijacion.shape = circulo1;
-        cuerpo.createFixture(defFijacion).setUserData("piernas");
-        circulo2.setRadius(33 / Juego.PPM);
-        circulo2.setPosition(new Vector2(0 / Juego.PPM, 13 / Juego.PPM));
-        defFijacion.shape = circulo2;
         cuerpo.createFixture(defFijacion).setUserData("torso");
+        circulo2.setRadius(33 / Juego.PPM);
+        circulo2.setPosition(new Vector2(0 / Juego.PPM, -13 / Juego.PPM));
+        defFijacion.shape = circulo2;
+        cuerpo.createFixture(defFijacion).setUserData("piernas");
 
         EdgeShape cabeza = new EdgeShape();
         cabeza.set(new Vector2(-15 / Juego.PPM, 46 / Juego.PPM), new Vector2(15 / Juego.PPM, 46 / Juego.PPM));

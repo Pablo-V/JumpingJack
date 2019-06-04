@@ -18,7 +18,7 @@ public class Hud implements Disposable {
 
     private int tiempoMundo;
     private float cuentaTiempo;
-    private int vidas;
+    private static int vidas;
     private static int puntos;
 
     Label labelPuntos;
@@ -26,7 +26,7 @@ public class Hud implements Disposable {
     Label labelNivel;
     Label labelTiempo;
     static Label labelValorPuntos;
-    Label labelValorVidas;
+    static Label labelValorVidas;
     Label labelValorNivel;
     Label labelValorTiempo;
 
@@ -77,6 +77,11 @@ public class Hud implements Disposable {
     public static void anadirPuntos(int valor) {
         puntos += valor;
         labelValorPuntos.setText(String.format("%06d", puntos));
+    }
+
+    public static void anadirVidas(int valor) {
+        vidas += valor;
+        labelValorVidas.setText("x" + String.format("%01d", vidas));
     }
 
     @Override

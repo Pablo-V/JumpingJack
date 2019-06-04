@@ -3,7 +3,6 @@ package com.pablov.jumpingjack.pantallas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -16,8 +15,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.pablov.jumpingjack.Juego;
+import com.pablov.jumpingjack.entidades.Enemigo;
 import com.pablov.jumpingjack.entidades.Jack;
-import com.pablov.jumpingjack.entidades.Raton;
 import com.pablov.jumpingjack.escenas.Hud;
 import com.pablov.jumpingjack.utilidades.ColisionMapa;
 import com.pablov.jumpingjack.utilidades.DetectorContactoMundo;
@@ -29,8 +28,6 @@ public class Pantalla implements Screen {
     private Viewport puerto;
     private Hud hud;
     public Jack jugador;
-    private Raton raton, raton2;
-    FPSLogger fpsLogger;
 
     //Variables mapa .tmx
     private TmxMapLoader cargadorMapa;
@@ -40,6 +37,7 @@ public class Pantalla implements Screen {
     //Variables Box2D
     private World mundo;
     private Box2DDebugRenderer b2dr;
+    private ColisionMapa colisionMapa;
 
     public Pantalla(Juego juego) {
         atlas = new TextureAtlas("entidades.pack");
@@ -58,16 +56,11 @@ public class Pantalla implements Screen {
 
         b2dr = new Box2DDebugRenderer();
 
-        new ColisionMapa(this);
+        colisionMapa = new ColisionMapa(this);
 
         jugador = new Jack(this);
 
         mundo.setContactListener(new DetectorContactoMundo());
-
-        fpsLogger = new FPSLogger();
-
-        raton = new Raton(this, 280 / Juego.PPM, 700 / Juego.PPM);
-        raton2 = new Raton(this, 490 / Juego.PPM, 700 / Juego.PPM);
     }
 
     public TextureAtlas getAtlas() {
@@ -94,8 +87,8 @@ public class Pantalla implements Screen {
         mundo.step(1 / 60f, 8, 3);
 
         jugador.actualizar(delta);
-        raton.actualizar(delta);
-        raton2.actualizar(delta);
+        for(Enemigo enemigo : colisionMapa.getRatones())
+            enemigo.actualizar(delta);
         hud.actualizar(delta);
 
         camara.position.x = jugador.cuerpo.getPosition().x;
@@ -109,8 +102,6 @@ public class Pantalla implements Screen {
     public void render(float delta) {
         actualizar(delta);
 
-        fpsLogger.log();
-
         Gdx.gl.glClearColor(66 / 255f, 176 / 255f, 244 / 255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -121,8 +112,11 @@ public class Pantalla implements Screen {
         juego.batch.setProjectionMatrix(camara.combined);
         juego.batch.begin();
         jugador.draw(juego.batch);
-        raton.draw(juego.batch);
-        raton2.draw(juego.batch);
+        for(Enemigo enemigo : colisionMapa.getRatones()) {
+            enemigo.draw(juego.batch);
+            if(enemigo.getX() < jugador.getX() + 6.5f)
+                enemigo.cuerpo.setActive(true);
+        }
         juego.batch.end();
         juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
         hud.escenario.draw();

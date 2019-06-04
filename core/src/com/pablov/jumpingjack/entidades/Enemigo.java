@@ -21,10 +21,11 @@ public abstract class Enemigo extends Sprite {
         setPosition(x, y);
         definirEnemigo();
         velocidad = new Vector2(2.5f, -6f);
+        cuerpo.setActive(false);
     }
 
     protected abstract void definirEnemigo();
-
+    public abstract void actualizar(float delta);
     public abstract void golpeadoEnCabeza();
 
     public void invertirVelocidad(boolean invertirX, boolean invertirY) {
