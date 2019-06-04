@@ -21,6 +21,8 @@ public class Juego extends Game {
 	public static final short BIT_DESTRUIDO = 16;
 	public static final short BIT_OBJETO = 32;
 	public static final short BIT_ENEMIGO = 64;
+	public static final short BIT_CABEZA_ENEMIGO = 128;
+	public static final short BIT_BARRERA = 256;
 
 	public SpriteBatch batch;
 

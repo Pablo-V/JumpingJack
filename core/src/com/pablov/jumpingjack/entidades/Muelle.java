@@ -15,6 +15,7 @@ public class Muelle extends ObjetoInteractivo {
         this.pantalla = pantalla;
         fijacion.setUserData(this);
         setFiltroCategoria(Juego.BIT_OBJETO);
+        defFijacion.filter.categoryBits = Juego.BIT_OBJETO;
     }
 
     @Override

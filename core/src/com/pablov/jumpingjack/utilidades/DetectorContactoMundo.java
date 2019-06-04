@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.pablov.jumpingjack.Juego;
+import com.pablov.jumpingjack.entidades.Enemigo;
 import com.pablov.jumpingjack.entidades.ObjetoInteractivo;
 
 /*Esta clase define un ConntactListener personalizado.
@@ -21,6 +23,8 @@ public class DetectorContactoMundo implements ContactListener {
         Gdx.app.log("contacto", "si");
         Fixture fijacionA = contact.getFixtureA();
         Fixture fijacionB = contact.getFixtureB();
+
+        int defColision = fijacionA.getFilterData().categoryBits | fijacionB.getFilterData().categoryBits;
 
         if(fijacionA.getUserData() == "cabeza" || fijacionB.getUserData() == "cabeza") {
             Fixture cabeza = fijacionA.getUserData() == "cabeza" ? fijacionA : fijacionB;
@@ -40,6 +44,27 @@ public class DetectorContactoMundo implements ContactListener {
             if(objeto.getUserData() != null && ObjetoInteractivo.class.isAssignableFrom(objeto.getUserData().getClass())) {
                 ((ObjetoInteractivo) objeto.getUserData()).tocarPies();
             }
+        }
+
+        switch (defColision) {
+            case Juego.BIT_CABEZA_ENEMIGO | Juego.BIT_JACK:
+                if(fijacionA.getFilterData().categoryBits == Juego.BIT_CABEZA_ENEMIGO)
+                    ((Enemigo)fijacionA.getUserData()).golpeadoEnCabeza();
+                else
+                    ((Enemigo)fijacionB.getUserData()).golpeadoEnCabeza();
+                break;
+            case Juego.BIT_ENEMIGO | Juego.BIT_BARRERA:
+                if(fijacionA.getFilterData().categoryBits == Juego.BIT_ENEMIGO)
+                    ((Enemigo)fijacionA.getUserData()).invertirVelocidad(true, false);
+                else
+                    ((Enemigo)fijacionB.getUserData()).invertirVelocidad(true, false);
+            case Juego.BIT_JACK | Juego.BIT_ENEMIGO:
+                Gdx.app.log("Jack", "Ha muerto");
+                break;
+            case Juego.BIT_ENEMIGO | Juego.BIT_ENEMIGO:
+                ((Enemigo)fijacionA.getUserData()).invertirVelocidad(true, false);
+                ((Enemigo)fijacionB.getUserData()).invertirVelocidad(true, false);
+                break;
         }
     }
 

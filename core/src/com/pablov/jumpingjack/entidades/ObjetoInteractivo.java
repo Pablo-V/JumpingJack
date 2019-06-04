@@ -21,6 +21,7 @@ public abstract class ObjetoInteractivo {
     protected Rectangle bordes;
     protected Body cuerpo;
     protected Fixture fijacion;
+    FixtureDef defFijacion;
 
     public ObjetoInteractivo(Pantalla pantalla, Rectangle bordes) {
         this.mundo = pantalla.getMundo();
@@ -28,7 +29,7 @@ public abstract class ObjetoInteractivo {
         this.bordes = bordes;
 
         BodyDef defCuerpo = new BodyDef();
-        FixtureDef defFijacion = new FixtureDef();
+        defFijacion = new FixtureDef();
         PolygonShape forma = new PolygonShape();
 
         defCuerpo.type = BodyDef.BodyType.StaticBody;

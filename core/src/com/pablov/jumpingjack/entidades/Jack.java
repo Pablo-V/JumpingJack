@@ -116,7 +116,7 @@ public class Jack extends Sprite {
 
     public void definirJack() {
         BodyDef defCuerpo = new BodyDef();
-        defCuerpo.position.set(70 / Juego.PPM, 770 / Juego.PPM);
+        defCuerpo.position.set(70 / Juego.PPM, 700 / Juego.PPM);
         defCuerpo.type = BodyDef.BodyType.DynamicBody;
         cuerpo = mundo.createBody(defCuerpo);
 
@@ -125,7 +125,10 @@ public class Jack extends Sprite {
         CircleShape circulo2 = new CircleShape();
 
         defFijacion.filter.categoryBits = Juego.BIT_JACK;
-        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA | Juego.BIT_BLOQUE | Juego.BIT_OBJETO | Juego.BIT_ENEMIGO;
+        defFijacion.filter.maskBits = Juego.BIT_SUELO | Juego.BIT_MONEDA |
+                Juego.BIT_BLOQUE | Juego.BIT_OBJETO | Juego.BIT_ENEMIGO |
+                Juego.BIT_CABEZA_ENEMIGO;
+
         circulo1.setRadius(33 / Juego.PPM);
         circulo1.setPosition(new Vector2(0 / Juego.PPM, -13 / Juego.PPM));
         defFijacion.shape = circulo1;

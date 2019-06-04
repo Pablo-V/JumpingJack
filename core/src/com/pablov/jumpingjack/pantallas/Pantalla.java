@@ -29,7 +29,7 @@ public class Pantalla implements Screen {
     private Viewport puerto;
     private Hud hud;
     public Jack jugador;
-    private Raton raton;
+    private Raton raton, raton2;
     FPSLogger fpsLogger;
 
     //Variables mapa .tmx
@@ -66,7 +66,8 @@ public class Pantalla implements Screen {
 
         fpsLogger = new FPSLogger();
 
-        raton = new Raton(this, 70 / Juego.PPM, 770 / Juego.PPM);
+        raton = new Raton(this, 280 / Juego.PPM, 700 / Juego.PPM);
+        raton2 = new Raton(this, 490 / Juego.PPM, 700 / Juego.PPM);
     }
 
     public TextureAtlas getAtlas() {
@@ -94,6 +95,7 @@ public class Pantalla implements Screen {
 
         jugador.actualizar(delta);
         raton.actualizar(delta);
+        raton2.actualizar(delta);
         hud.actualizar(delta);
 
         camara.position.x = jugador.cuerpo.getPosition().x;
@@ -120,6 +122,7 @@ public class Pantalla implements Screen {
         juego.batch.begin();
         jugador.draw(juego.batch);
         raton.draw(juego.batch);
+        raton2.draw(juego.batch);
         juego.batch.end();
         juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
         hud.escenario.draw();

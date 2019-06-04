@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="10" nextobjectid="198">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="11" nextobjectid="222">
  <tileset firstgid="1" name="TileSet" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
   <image source="tiles_spritesheet.png" width="914" height="936"/>
  </tileset>
@@ -8,12 +8,12 @@
  </tileset>
  <layer id="5" name="Fondo" width="150" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0rENgDAQA0DGYlW2RRR0EClFcMjfSW4j5+VtAwAAAAAAAAAAAABux0JhDukd2NR60jtYfVNPvVqdZ/1Hj/QOVt/Updqu0juosKk3f+7ekt5BtU3tHRn1roxJ0sie6btWTtrorun7VswMvuibvnOlAFR2AvJqGpc=
+   eJzt1sENgkAURVGKsQgLsQo7slthx2IgEhgf8M9J3tZ8J3fBMAAAAAAAAAAAAAAp73GP2WCvqanXuOdsbPO50Y7QakpX26Q7uEpTuvpduoOzNXW01l1rN5/1f2yR7uDuTU2qdZXuoEJTS658+5p0B9Waan2nLa3X71qfJfW8M/2ulZfW+9b0+1bcGfzj3vQ7VxpAZV/X9CBH
   </data>
  </layer>
  <layer id="1" name="Frente" width="150" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmT1uwkAQRrdMlDpClChVCg5AH4qU3AKOQJk6F0jCUbhcdiUsWSuTzP6Mvfa8J30yYLFehqexvXYOAAAAoJzzQAAAAObO4c7rwN5nJ8g2YUwAgBRCH4p7zBKPCQB12PgcM3PqjdNdA20Fn7XSL+K5SH/Dh5PX6FFp7i0TnHr2+c6MZaQ1+nK23Cp16uLzaTiXhFpZcavUqc6rB8NJ8cqCWzWcwqt0r5bsVi2n8CrPqyW6VdMpvMr3Stut99t2Hb3XINwX13Sq88p6SuoX3Oqv08yZuXgFabxOPQHXvlcg55iRfo+M13f/2hdn6DzeqlcWKXnekfO/xUj3Sa8RW/PKIrXvpcb0SsstnCpjCqdqe6XhFk7lU3NtWrPe0jF/fJ4Kvs+5r5wXn5Vrp+brXmJSxr3nFugztVNa/Qq3pqMFp/7zqlsHu962OePj1ni04tRYCW69EfVYcorMP7/H69+5
+   eJztmb1OwzAURj2CmCvUserEUHaYYWDsW5RHYGTuCwB9FF4OW2oky02K/27i5J4jfUqaqK57e3STuMYAAAAAlPPREwAAgLmzH9h3vNo8RWSXMCYAQAquD4U9ZomfCQB12NgcMvPujdPdA+0ijrXSL8K5xH6HTxNfo1uhubeMc2pl850ZzcTW6MvocqvUqZPNUXFOCbXS4lapU51XN4qT4pUGt2o4hVfpXi3ZrVpO4VWeV0t0q6ZTeJXvlbRbb+ftOngtgXsurulU55X2lNTPueWv08yZuXgFwzz2HHsYfRaXtO4VXOfZ2z9kxO+R4frutXNh+q7jrXqlkZL/O3J+t5DYc7H3iK15pZHaz1JjeiXlFk6VMYVTtb2ScAun8qm5Ni1Z79gxf2zuCt7Pta+crc29aafmay8hKeMOuQXyTO2UVL/Crelowan/vOrWwX7P25zxcWs8WnFqrDi3Xoh4NDlF5p8/vrHgIQ==
   </data>
  </layer>
  <objectgroup id="2" name="Terreno">
@@ -99,5 +99,26 @@
  </objectgroup>
  <objectgroup id="9" name="Objetos">
   <object id="197" x="1540" y="1908" width="68" height="52"/>
+  <object id="210" x="10290" y="1288" width="69.3333" height="112"/>
+ </objectgroup>
+ <objectgroup id="10" name="Barreras">
+  <object id="199" x="770" y="1470" width="140" height="490"/>
+  <object id="200" x="1680" y="1470" width="140" height="490"/>
+  <object id="204" x="5320" y="1890" width="70" height="70"/>
+  <object id="205" x="2800" y="630" width="70" height="70"/>
+  <object id="206" x="3780" y="630" width="70" height="70"/>
+  <object id="207" x="8120" y="630" width="70" height="70"/>
+  <object id="208" x="8820" y="630" width="70" height="70"/>
+  <object id="211" x="70" y="1330" width="70" height="70"/>
+  <object id="212" x="910" y="1330" width="70" height="70"/>
+  <object id="213" x="1610" y="1330" width="70" height="70"/>
+  <object id="214" x="2100" y="1330" width="70" height="70"/>
+  <object id="215" x="5880" y="1890" width="70" height="70"/>
+  <object id="216" x="6160" y="1890" width="70" height="70"/>
+  <object id="217" x="6720" y="1890" width="70" height="70"/>
+  <object id="218" x="7000" y="1890" width="70" height="70"/>
+  <object id="219" x="7560" y="1890" width="70" height="70"/>
+  <object id="220" x="7840" y="1890" width="70" height="70"/>
+  <object id="221" x="8400" y="1890" width="70" height="70"/>
  </objectgroup>
 </map>

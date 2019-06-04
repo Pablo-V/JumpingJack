@@ -41,6 +41,21 @@ public class ColisionMapa {
             cuerpo.createFixture(defFijacion);
         }
 
+        for (MapObject objeto : mapa.getLayers().get("Barreras").getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) objeto).getRectangle();
+            defCuerpo = new BodyDef();
+            defFijacion = new FixtureDef();
+            forma = new PolygonShape();
+
+            defCuerpo.type = BodyDef.BodyType.StaticBody;
+            defCuerpo.position.set((rect.getX() + rect.getWidth() / 2) / Juego.PPM, (rect.getY() + rect.getHeight() / 2) / Juego.PPM);
+            cuerpo = mundo.createBody(defCuerpo);
+            forma.setAsBox(rect.getWidth() / 2 / Juego.PPM, rect.getHeight() / 2 / Juego.PPM);
+            defFijacion.shape = forma;
+            defFijacion.filter.categoryBits = Juego.BIT_BARRERA;
+            cuerpo.createFixture(defFijacion);
+        }
+
         //Obtener objetos moneda de capas Sorpesas y Monedas
         for (MapObject objeto : mapa.getLayers().get("Sorpresas").getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) objeto).getRectangle();
