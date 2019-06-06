@@ -8,10 +8,13 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Filter;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.pablov.jumpingjack.Juego;
+import com.pablov.jumpingjack.escenas.Hud;
 import com.pablov.jumpingjack.pantallas.Pantalla;
 
 public class Jack extends Sprite {
@@ -22,13 +25,14 @@ public class Jack extends Sprite {
     public World mundo;
     public Body cuerpo;
     private TextureRegion jackParado;
+    private TextureRegion jackMuerto;
     private Animation<TextureRegion> jackCorrer;
     private Animation<TextureRegion> jackSaltar;
     private Animation<TextureRegion> jackCaer;
     private Animation<TextureRegion> jackMorir;
     private float tiempoEstado;
     private boolean correrDerecha;
-    private boolean jackMuerto;
+    private boolean jackEstaMuerto;
 
     public Jack(Pantalla pantalla) {
         super(pantalla.getAtlas().findRegion("jack/jack_para"));
@@ -102,7 +106,7 @@ public class Jack extends Sprite {
     }
 
     public State getEstado() {
-        if (jackMuerto)
+        if (jackEstaMuerto)
             return State.MORIR;
         if (cuerpo.getLinearVelocity().y > 0 || (cuerpo.getLinearVelocity().y < 0 && estadoAnterior == State.SALTAR))
             return State.SALTAR;
@@ -112,6 +116,24 @@ public class Jack extends Sprite {
             return State.CORRER;
         else
             return State.PARAR;
+    }
+
+    public void golpeado() {
+        jackEstaMuerto = true;
+        Filter filtro = new Filter();
+        filtro.maskBits = Juego.BIT_NADA;
+        for(Fixture fijacion : cuerpo.getFixtureList())
+            fijacion.setFilterData(filtro);
+        cuerpo.applyLinearImpulse(new Vector2(0, 8f), cuerpo.getWorldCenter(), true);
+        Hud.anadirVidas(-1);
+    }
+
+    public boolean estaMuerto() {
+        return jackEstaMuerto;
+    }
+
+    public float getTiempoEstado() {
+        return tiempoEstado;
     }
 
     public void definirJack() {
@@ -132,11 +154,11 @@ public class Jack extends Sprite {
         circulo1.setRadius(33 / Juego.PPM);
         circulo1.setPosition(new Vector2(0 / Juego.PPM, 13 / Juego.PPM));
         defFijacion.shape = circulo1;
-        cuerpo.createFixture(defFijacion).setUserData("torso");
+        cuerpo.createFixture(defFijacion).setUserData(this);
         circulo2.setRadius(33 / Juego.PPM);
         circulo2.setPosition(new Vector2(0 / Juego.PPM, -13 / Juego.PPM));
         defFijacion.shape = circulo2;
-        cuerpo.createFixture(defFijacion).setUserData("piernas");
+        cuerpo.createFixture(defFijacion).setUserData(this);
 
         EdgeShape cabeza = new EdgeShape();
         cabeza.set(new Vector2(-15 / Juego.PPM, 46 / Juego.PPM), new Vector2(15 / Juego.PPM, 46 / Juego.PPM));
@@ -145,7 +167,7 @@ public class Jack extends Sprite {
         cuerpo.createFixture(defFijacion).setUserData("cabeza");
 
         EdgeShape pies = new EdgeShape();
-        pies.set(new Vector2(-20 / Juego.PPM, -48 / Juego.PPM), new Vector2(20 / Juego.PPM, -48 / Juego.PPM));
+        pies.set(new Vector2(-10 / Juego.PPM, -48 / Juego.PPM), new Vector2(10 / Juego.PPM, -48 / Juego.PPM));
         defFijacion.shape = pies;
         defFijacion.isSensor = true;
         cuerpo.createFixture(defFijacion).setUserData("pies");

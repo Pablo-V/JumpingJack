@@ -36,7 +36,7 @@ public class Pantalla implements Screen {
 
     //Variables Box2D
     private World mundo;
-    private Box2DDebugRenderer b2dr;
+    //private Box2DDebugRenderer b2dr;
     private ColisionMapa colisionMapa;
 
     public Pantalla(Juego juego) {
@@ -54,7 +54,7 @@ public class Pantalla implements Screen {
 
         mundo = new World(new Vector2(0, -17), true);
 
-        b2dr = new Box2DDebugRenderer();
+        //b2dr = new Box2DDebugRenderer();
 
         colisionMapa = new ColisionMapa(this);
 
@@ -73,13 +73,16 @@ public class Pantalla implements Screen {
     }
 
     public void gestionarEntrada(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (jugador.cuerpo.getLinearVelocity().y > -0.3f && jugador.cuerpo.getLinearVelocity().y < 0.3f))
-            jugador.cuerpo.applyLinearImpulse(new Vector2(0, 11f), jugador.cuerpo.getWorldCenter(), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.D) && jugador.cuerpo.getLinearVelocity().x <= 5)
-            jugador.cuerpo.applyLinearImpulse(new Vector2(0.5f, 0), jugador.cuerpo.getWorldCenter(), true);
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && jugador.cuerpo.getLinearVelocity().x >= -5)
-            jugador.cuerpo.applyLinearImpulse(new Vector2(-0.5f, 0), jugador.cuerpo.getWorldCenter(), true);
+        if (jugador.estadoActual != Jack.State.MORIR) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (jugador.cuerpo.getLinearVelocity().y > -0.3f && jugador.cuerpo.getLinearVelocity().y < 0.3f))
+                jugador.cuerpo.applyLinearImpulse(new Vector2(0, 11f), jugador.cuerpo.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.D) && jugador.cuerpo.getLinearVelocity().x <= 5)
+                jugador.cuerpo.applyLinearImpulse(new Vector2(0.5f, 0), jugador.cuerpo.getWorldCenter(), true);
+            if (Gdx.input.isKeyPressed(Input.Keys.A) && jugador.cuerpo.getLinearVelocity().x >= -5)
+                jugador.cuerpo.applyLinearImpulse(new Vector2(-0.5f, 0), jugador.cuerpo.getWorldCenter(), true);
+        }
     }
+
 
     public void actualizar(float delta) {
         gestionarEntrada(delta);
@@ -87,13 +90,14 @@ public class Pantalla implements Screen {
         mundo.step(1 / 60f, 8, 3);
 
         jugador.actualizar(delta);
-        for(Enemigo enemigo : colisionMapa.getRatones())
+        for (Enemigo enemigo : colisionMapa.getRatones())
             enemigo.actualizar(delta);
         hud.actualizar(delta);
 
-        camara.position.x = jugador.cuerpo.getPosition().x;
-        camara.position.y = jugador.cuerpo.getPosition().y;
-
+        if (jugador.estadoActual != Jack.State.MORIR) {
+            camara.position.x = jugador.cuerpo.getPosition().x;
+            camara.position.y = jugador.cuerpo.getPosition().y;
+        }
         renderer.setView(camara);
         camara.update();
     }
@@ -107,19 +111,31 @@ public class Pantalla implements Screen {
 
         renderer.render();
 
-        b2dr.render(mundo, camara.combined);
+        //b2dr.render(mundo, camara.combined);
 
         juego.batch.setProjectionMatrix(camara.combined);
         juego.batch.begin();
         jugador.draw(juego.batch);
-        for(Enemigo enemigo : colisionMapa.getRatones()) {
+        for (Enemigo enemigo : colisionMapa.getRatones()) {
             enemigo.draw(juego.batch);
-            if(enemigo.getX() < jugador.getX() + 6.5f)
+            if (enemigo.getX() < jugador.getX() + 6.5f)
                 enemigo.cuerpo.setActive(true);
         }
         juego.batch.end();
         juego.batch.setProjectionMatrix(hud.escenario.getCamera().combined);
         hud.escenario.draw();
+
+        if(gameOver()) {
+            juego.setScreen(new PantallaGameOver(juego));
+            dispose();
+        }
+    }
+
+    public boolean gameOver() {
+        if (jugador.estadoActual == Jack.State.MORIR && jugador.getTiempoEstado() > 3)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -157,7 +173,7 @@ public class Pantalla implements Screen {
         mapa.dispose();
         mundo.dispose();
         renderer.dispose();
-        b2dr.dispose();
+        //b2dr.dispose();
         hud.dispose();
     }
 }

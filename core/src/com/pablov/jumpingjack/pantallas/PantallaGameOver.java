@@ -17,10 +17,10 @@ import com.pablov.jumpingjack.Juego;
 public class PantallaGameOver implements Screen {
     private Viewport puerto;
     private Stage escenario;
-    private Game game;
+    private Game juego;
 
     public PantallaGameOver(Game game) {
-        this.game = game;
+        this.juego = game;
         puerto = new FitViewport(Juego.ANCHO_V, Juego.ALTO_V, new OrthographicCamera());
         escenario = new Stage(puerto, ((Juego) game).batch);
 
@@ -31,7 +31,11 @@ public class PantallaGameOver implements Screen {
         tabla.setFillParent(true);
 
         Label labelGameOver = new Label("GAME OVER", fuente);
+        Label labelOtraVez = new Label("Clic para reiniciar", fuente);
         tabla.add(labelGameOver).expandX();
+        tabla.row();
+        tabla.add(labelOtraVez).expandX().padTop(10f);
+
 
         escenario.addActor(tabla);
     }
@@ -43,8 +47,13 @@ public class PantallaGameOver implements Screen {
 
     @Override
     public void render(float delta) {
+        if (Gdx.input.justTouched()) {
+            juego.setScreen(new Pantalla((Juego) juego));
+            dispose();
+        }
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        escenario.draw();
     }
 
     @Override
@@ -69,6 +78,6 @@ public class PantallaGameOver implements Screen {
 
     @Override
     public void dispose() {
-
+        escenario.dispose();
     }
 }

@@ -65,6 +65,10 @@ public class Hud implements Disposable {
         escenario.addActor(tabla);
     }
 
+    public static int getVidas() {
+        return vidas;
+    }
+
     public void actualizar(float delta) {
         cuentaTiempo += delta;
         if(cuentaTiempo >= 1) {

@@ -8,7 +8,9 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.entidades.Enemigo;
+import com.pablov.jumpingjack.entidades.Jack;
 import com.pablov.jumpingjack.entidades.ObjetoInteractivo;
+import com.pablov.jumpingjack.escenas.Hud;
 
 /*Esta clase define un ConntactListener personalizado.
  * Un ContactListener es la clase que es llamada cuando dos fijaciones colisionan en Box2D.
@@ -58,8 +60,12 @@ public class DetectorContactoMundo implements ContactListener {
                 else
                     ((Enemigo) fijacionB.getUserData()).invertirVelocidad(true, false);
             case Juego.BIT_JACK | Juego.BIT_ENEMIGO:
-                if (fijacionA.getUserData() != null && fijacionB.getUserData() != null)
-                    Gdx.app.log("Jack", "Ha muerto");
+                if (fijacionA.getUserData() != null && fijacionB.getUserData() != null) {
+                    if (fijacionA.getFilterData().categoryBits == Juego.BIT_JACK)
+                        ((Jack) fijacionA.getUserData()).golpeado();
+                    else
+                        ((Jack) fijacionB.getUserData()).golpeado();
+                }
                 break;
             case Juego.BIT_ENEMIGO:
                 if (fijacionA.getUserData() != null)

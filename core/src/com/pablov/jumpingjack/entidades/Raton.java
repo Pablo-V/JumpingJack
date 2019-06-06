@@ -69,33 +69,25 @@ public class Raton extends Enemigo {
         cuerpo = mundo.createBody(defCuerpo);
 
         FixtureDef defFijacion = new FixtureDef();
-        /*PolygonShape forma = new PolygonShape();
-        Rectangle rect = new Rectangle();
-        rect.width = 59;
-        rect.height = 35;
-        forma.setAsBox(rect.getWidth() / 2 / Juego.PPM, rect.getHeight() / 2 / Juego.PPM);
-        defFijacion.shape = forma;
-        defFijacion.filter.categoryBits = Juego.BIT_ENEMIGO;
-        cuerpo.createFixture(defFijacion).setUserData(this);*/
 
         CircleShape circulo1 = new CircleShape();
         CircleShape circulo2 = new CircleShape();
 
         circulo1.setRadius(20 / Juego.PPM);
-        circulo1.setPosition(new Vector2(-7.5f / Juego.PPM, 3.5f / Juego.PPM));
+        circulo1.setPosition(new Vector2(-10.5f / Juego.PPM, 3.5f / Juego.PPM));
         defFijacion.shape = circulo1;
         defFijacion.filter.categoryBits = Juego.BIT_ENEMIGO;
         cuerpo.createFixture(defFijacion).setUserData(this);
         circulo2.setRadius(20 / Juego.PPM);
-        circulo2.setPosition(new Vector2(7.5f / Juego.PPM, 3.5f / Juego.PPM));
+        circulo2.setPosition(new Vector2(10.5f / Juego.PPM, 3.5f / Juego.PPM));
         defFijacion.shape = circulo2;
         defFijacion.filter.categoryBits = Juego.BIT_ENEMIGO;
         cuerpo.createFixture(defFijacion).setUserData(this);
 
         PolygonShape cabeza = new PolygonShape();
         Vector2[] vertices = new Vector2[4];
-        vertices[0] = new Vector2(-22, 35).scl(1 / Juego.PPM);
-        vertices[1] = new Vector2(22, 35).scl(1 / Juego.PPM);
+        vertices[0] = new Vector2(-21, 35).scl(1 / Juego.PPM);
+        vertices[1] = new Vector2(21, 35).scl(1 / Juego.PPM);
         vertices[2] = new Vector2(0, 20).scl(1 / Juego.PPM);
         vertices[3] = new Vector2(0, 20).scl(1 / Juego.PPM);
         cabeza.set(vertices);
