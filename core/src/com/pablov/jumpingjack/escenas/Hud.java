@@ -16,12 +16,15 @@ public class Hud implements Disposable {
     public Stage escenario;
     private Viewport puerto;
 
-    private int tiempoMundo;
+    public int tiempoMundo;
     private float cuentaTiempo;
-    private static int vidas;
-    private static int puntos;
 
+    private static int vidas;
+
+    private static int puntos;
+    private static int nivel;
     Label labelPuntos;
+
     Label labelVidas;
     Label labelNivel;
     Label labelTiempo;
@@ -29,12 +32,12 @@ public class Hud implements Disposable {
     static Label labelValorVidas;
     Label labelValorNivel;
     Label labelValorTiempo;
-
     public Hud(SpriteBatch batch) {
-        tiempoMundo = 300;
+        tiempoMundo = 180;
         cuentaTiempo = 0;
         vidas = 3;
         puntos = 0;
+        nivel = 1;
 
         puerto = new FitViewport(Juego.ANCHO_V, Juego.ALTO_V, new OrthographicCamera());
         escenario = new Stage(puerto, batch);
@@ -49,7 +52,7 @@ public class Hud implements Disposable {
         labelTiempo = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         labelValorPuntos = new Label(String.format("%06d", puntos), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         labelValorVidas = new Label("x" + String.format("%01d", vidas), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        labelValorNivel = new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        labelValorNivel = new Label((String.format("%01d", nivel)), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         labelValorTiempo = new Label(String.format("%03d", tiempoMundo), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         tabla.add(labelPuntos).expandX().padTop(5);
@@ -69,6 +72,26 @@ public class Hud implements Disposable {
         return vidas;
     }
 
+    public static void setVidas(int vidas) {
+        Hud.vidas = vidas;
+    }
+
+    public static int getPuntos() {
+        return puntos;
+    }
+
+    public static void setPuntos(int puntos) {
+        Hud.puntos = puntos;
+    }
+
+    public static int getNivel() {
+        return nivel;
+    }
+
+    public static void setNivel(int nivel) {
+        Hud.nivel = nivel;
+    }
+
     public void actualizar(float delta) {
         cuentaTiempo += delta;
         if(cuentaTiempo >= 1) {
@@ -76,6 +99,9 @@ public class Hud implements Disposable {
             labelValorTiempo.setText(String.format("%03d", tiempoMundo));
             cuentaTiempo = 0;
         }
+        labelValorNivel.setText(String.format("%01d", nivel));
+        labelValorVidas.setText("x" + String.format("%01d", vidas));
+        labelValorPuntos.setText(String.format("%06d", puntos));
     }
 
     public static void anadirPuntos(int valor) {

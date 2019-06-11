@@ -15,6 +15,7 @@ import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.entidades.Bloque;
 import com.pablov.jumpingjack.entidades.Moneda;
 import com.pablov.jumpingjack.entidades.Muelle;
+import com.pablov.jumpingjack.entidades.Puerta;
 import com.pablov.jumpingjack.entidades.Raton;
 import com.pablov.jumpingjack.entidades.Sorpresa;
 import com.pablov.jumpingjack.pantallas.Pantalla;
@@ -117,6 +118,6 @@ public class ColisionMapa {
         //Obtener objeto puerta de capa Objetos
         MapObject objeto = mapa.getLayers().get("Objetos").getObjects().get("Puerta");
         Rectangle rect = ((RectangleMapObject) objeto).getRectangle();
-        new Muelle(pantalla, rect);
+        new Puerta(pantalla, rect);
     }
 }

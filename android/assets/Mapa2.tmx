@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="12" nextobjectid="291">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="left-down" width="150" height="30" tilewidth="70" tileheight="70" infinite="0" nextlayerid="12" nextobjectid="290">
  <tileset firstgid="1" name="TileSet" tilewidth="70" tileheight="70" spacing="2" tilecount="156" columns="12">
   <image source="tiles_spritesheet.png" width="914" height="936"/>
  </tileset>
@@ -13,7 +13,7 @@
  </layer>
  <layer id="1" name="Frente" width="150" height="30">
   <data encoding="base64" compression="zlib">
-   eJztmrFOwzAQhi2xgBiYEGJETAxlLmyVysDIW5RHyMjMxgT0OTr15bAlW7JODrWdu+QS/5/0K02sOo716eKkNQYAAAAAYDhdIgAAAMDceev57HixecrIqqBPAAAowdUhWmOWeE4AAA93NrvKvEf9hDXQKuOYlnpBx5J7DR8mf44uhMauGefUtc1PZVomd46+TVtuDXVqb/PZcPYFc9WKW0OdCl6dN5wSr1pwi8MpeFXu1ZLd4nIKXtV5tUS3OJ2CV/VeSbv16rcd2ZfAPRdzOhW8Qurj3Irf08yZtc/Uc9qXMD4tSF5rLY+JYw8D+uNCq1uSTnU+t6b8P1tanNr47XN0bFeRuEbS97v/tdGk7uPa3NJWpyiSTg35vaNm/ULJbctdI2pxS7tTASmnuNe9Y3ml2a0xnLqyOUvkq6KvuTvF7ZVGt+ZSpyianOIYC8e1/tpcJr6/nigtcm9zY6a7R1Di5xlKSb99bgF5pnZKql7BrenQ4NQpr8J7sKPf1vSv0a0DU/uR7Euf71S7FqfGinNri4inJaeQ+ecPX5kYBw==
+   eJztmrFOwzAQhi2xgBiYEGJETAxlLswwMPIW5REyMrMxAX2UvlxtKZYsK6H2+S4+x/8n/UqatK5jfbo4bo0BAAAAAChnmAgAAADQOu8z+45Xm6eEbDLaBACAHFwdimvMGr8TAMDDnc2OmI+gHT8H2iQc01Iv4r6kXsOnSR+jC6G+a8Y5dW3zS0zPpI7Rj+nLrVKn9jZfHWefMVa9uFXqlPfqvOPkeNWDWxxOwat8r9bsFpdT8Irm1Rrd4nQKXtG9knbrbdwO0WsJ3HMxp1PeK4Qe51a4TtMy2zG1x3Quvn9akLxWKo8Txx4K2uNCq1uSTg1jbk3+f7Y0OeV4DvZ3hIQ1Ml7f/e9cnKn7uDa3tNWpGEmnSn7voMxfYlLPpc4Rtbil3SmPlFPc896lvNLs1hJOXdmcTeSb0FbrTnF7pdGtVupUjCanOPrCca1/NpcTn99WSo/c29yYeveImPB5Jian3Tm3gDy1nZKqV3CrHhqcOuWVXwc7jFtK+2t263D6LYuixaml4tx6QcTTk1NI+zkCatoSHg==
   </data>
  </layer>
  <objectgroup id="2" name="Terreno">
@@ -105,8 +105,8 @@
  </objectgroup>
  <objectgroup id="9" name="Objetos">
   <object id="197" name="Muelle" x="1540" y="1908" width="68" height="52"/>
+  <object id="210" name="Puerta" x="10290" y="1288" width="69.3333" height="112"/>
   <object id="253" name="Muelle" x="6440" y="1910" width="69" height="50"/>
-  <object id="290" name="Puerta" x="10290" y="1400" width="70" height="70"/>
  </objectgroup>
  <objectgroup id="10" name="Barreras">
   <object id="199" x="770" y="1470" width="140" height="490"/>

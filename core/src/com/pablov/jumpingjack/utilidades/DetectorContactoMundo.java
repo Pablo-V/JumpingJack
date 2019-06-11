@@ -10,6 +10,7 @@ import com.pablov.jumpingjack.Juego;
 import com.pablov.jumpingjack.entidades.Enemigo;
 import com.pablov.jumpingjack.entidades.Jack;
 import com.pablov.jumpingjack.entidades.ObjetoInteractivo;
+import com.pablov.jumpingjack.entidades.Puerta;
 import com.pablov.jumpingjack.escenas.Hud;
 
 /*Esta clase define un ConntactListener personalizado.
@@ -43,6 +44,10 @@ public class DetectorContactoMundo implements ContactListener {
 
             // Si el objeto no es nulo y extiende de ObjetoInteractivo
             if (objeto.getUserData() != null && ObjetoInteractivo.class.isAssignableFrom(objeto.getUserData().getClass())) {
+                ((ObjetoInteractivo) objeto.getUserData()).tocarPies();
+            }
+
+            if (objeto.getUserData() != null && Puerta.class.isAssignableFrom(objeto.getUserData().getClass())) {
                 ((ObjetoInteractivo) objeto.getUserData()).tocarPies();
             }
         }

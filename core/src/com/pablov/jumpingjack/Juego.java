@@ -3,7 +3,7 @@ package com.pablov.jumpingjack;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.pablov.jumpingjack.pantallas.Pantalla;
+import com.pablov.jumpingjack.pantallas.MenuPrincipal;
 
 public class Juego extends Game {
     public static final int ANCHO_V = 800;
@@ -31,7 +31,7 @@ public class Juego extends Game {
     public void create() {
         Gdx.graphics.setTitle("Jumping Jack");
         batch = new SpriteBatch();
-        setScreen(new Pantalla(this));
+        setScreen(new MenuPrincipal(this));
     }
 
     @Override
