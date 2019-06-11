@@ -14,7 +14,7 @@ public class DatosJuego {
     public Preferences prefs;
 
     public DatosJuego() {
-        prefs = Gdx.app.getPreferences("prueba");
+        prefs = Gdx.app.getPreferences("jumpingjack_datos");
     }
 
     public void nuevo() {
