@@ -17,11 +17,10 @@ import com.pablov.jumpingjack.pantallas.Pantalla;
 public abstract class ObjetoInteractivo {
     protected World mundo;
     protected TiledMap mapa;
-    protected TiledMapTile tile;
     protected Rectangle bordes;
     protected Body cuerpo;
     protected Fixture fijacion;
-    FixtureDef defFijacion;
+    protected FixtureDef defFijacion;
 
     public ObjetoInteractivo(Pantalla pantalla, Rectangle bordes) {
         this.mundo = pantalla.getMundo();
@@ -44,13 +43,13 @@ public abstract class ObjetoInteractivo {
 
     public abstract void tocarPies();
 
-    public void setFiltroCategoria(short bitFiltro) {
+    protected void setFiltroCategoria(short bitFiltro) {
         Filter filtro = new Filter();
         filtro.categoryBits = bitFiltro;
         fijacion.setFilterData(filtro);
     }
 
-    public TiledMapTileLayer.Cell getCelda() {
+    protected TiledMapTileLayer.Cell getCelda() {
         TiledMapTileLayer capa = (TiledMapTileLayer) mapa.getLayers().get("Frente");
         return capa.getCell((int)(cuerpo.getPosition().x), (int)(cuerpo.getPosition().y));
     }

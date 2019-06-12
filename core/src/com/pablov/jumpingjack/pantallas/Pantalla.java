@@ -31,14 +31,12 @@ public class Pantalla implements Screen {
     public Jack jugador;
     public DatosJuego datos;
 
-    //Variables mapa .tmx
-    private TmxMapLoader cargadorMapa;
+    //Variables mapa de baldosas
     private TiledMap mapa;
     private OrthogonalTiledMapRenderer renderer;
 
     //Variables Box2D
     private World mundo;
-    //private Box2DDebugRenderer b2dr;
     private ColisionMapa colisionMapa;
 
     public Pantalla(Juego juego) {
@@ -52,15 +50,13 @@ public class Pantalla implements Screen {
         Hud.setVidas(datos.prefs.getInteger("vidas"));
         Hud.setPuntos(datos.prefs.getInteger("puntos"));
 
-        cargadorMapa = new TmxMapLoader();
+        TmxMapLoader cargadorMapa = new TmxMapLoader();
         mapa = cargadorMapa.load("Mapa1.tmx");
         renderer = new OrthogonalTiledMapRenderer(mapa, 1 / Juego.PPM);
 
         camara.position.set(puerto.getWorldWidth() / 2 / Juego.PPM, 700 / Juego.PPM, 0);
 
         mundo = new World(new Vector2(0, -17), true);
-
-        //b2dr = new Box2DDebugRenderer();
 
         colisionMapa = new ColisionMapa(this);
 
@@ -78,7 +74,7 @@ public class Pantalla implements Screen {
 
     }
 
-    public void gestionarEntrada(float delta) {
+    private void gestionarEntrada(float delta) {
         if (jugador.estadoActual != Jack.State.MORIR) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && (jugador.cuerpo.getLinearVelocity().y > -0.3f && jugador.cuerpo.getLinearVelocity().y < 0.3f))
                 jugador.cuerpo.applyLinearImpulse(new Vector2(0, 11f), jugador.cuerpo.getWorldCenter(), true);
@@ -90,7 +86,7 @@ public class Pantalla implements Screen {
     }
 
 
-    public void actualizar(float delta) {
+    private void actualizar(float delta) {
         gestionarEntrada(delta);
 
         mundo.step(1 / 60f, 8, 3);
@@ -142,13 +138,15 @@ public class Pantalla implements Screen {
             }
 
             if (gameOver()) {
-                datos.guardar();
+                datos.nuevo();
                 juego.setScreen(new PantallaGameOver(juego));
                 dispose();
             }
 
             if (derrotado()) {
-                datos.guardar();
+                datos.prefs.putInteger("vidas", Hud.getVidas());
+                datos.prefs.putInteger("puntos", datos.prefs.getInteger("puntos"));
+                datos.prefs.putInteger("nivel", datos.prefs.getInteger("nivel"));
                 juego.setScreen(new Pantalla(juego));
                 dispose();
             }
@@ -156,18 +154,12 @@ public class Pantalla implements Screen {
         }
     }
 
-    public boolean derrotado() {
-        if (jugador.estadoActual == Jack.State.MORIR && jugador.getTiempoEstado() > 3 && Hud.getVidas() > 0)
-            return true;
-        else
-            return false;
+    private boolean derrotado() {
+        return jugador.estadoActual == Jack.State.MORIR && jugador.getTiempoEstado() > 3 && Hud.getVidas() > 0;
     }
 
-    public boolean gameOver() {
-        if (jugador.estadoActual == Jack.State.MORIR && jugador.getTiempoEstado() > 3 && Hud.getVidas() <= 0)
-            return true;
-        else
-            return false;
+    private boolean gameOver() {
+        return jugador.estadoActual == Jack.State.MORIR && jugador.getTiempoEstado() > 3 && Hud.getVidas() <= 0;
     }
 
     @Override
@@ -203,11 +195,9 @@ public class Pantalla implements Screen {
     @Override
     public void dispose() {
         Gdx.app.log("Estado", "dispose");
-        //this.dispose();
         mapa.dispose();
         mundo.dispose();
         renderer.dispose();
-        //b2dr.dispose();
         hud.dispose();
     }
 }

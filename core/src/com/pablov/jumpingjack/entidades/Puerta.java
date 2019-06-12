@@ -9,6 +9,7 @@ import com.pablov.jumpingjack.pantallas.Pantalla;
 public class Puerta extends ObjetoInteractivo {
 
     protected Pantalla pantalla;
+    private boolean tocada;
 
     public Puerta(Pantalla pantalla, Rectangle bordes) {
         super(pantalla, bordes);
@@ -25,12 +26,14 @@ public class Puerta extends ObjetoInteractivo {
 
     @Override
     public void tocarPies() {
-        Gdx.app.log("Puerta", "Colision");
-        setFiltroCategoria(Juego.BIT_DESTRUIDO);
-        Juego juegoActual = pantalla.juego;
-        pantalla.datos.guardar();
+        if (!tocada) {
+            Gdx.app.log("Puerta", "Colision");
+            Hud.setNivel(Hud.getNivel() + 1);
+            pantalla.datos.guardar();
+            setFiltroCategoria(Juego.BIT_DESTRUIDO);
+            tocada = true;
+        }
         pantalla = new Pantalla(pantalla.juego);
-        Hud.setNivel(Hud.getNivel() + 1);
-        juegoActual.setScreen(pantalla);
+        pantalla.juego.setScreen(pantalla);
     }
 }

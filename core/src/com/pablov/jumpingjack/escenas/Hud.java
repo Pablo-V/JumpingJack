@@ -14,24 +14,19 @@ import com.pablov.jumpingjack.Juego;
 
 public class Hud implements Disposable {
     public Stage escenario;
-    private Viewport puerto;
 
     public int tiempoMundo;
     private float cuentaTiempo;
 
     private static int vidas;
-
     private static int puntos;
     private static int nivel;
-    Label labelPuntos;
 
-    Label labelVidas;
-    Label labelNivel;
-    Label labelTiempo;
-    static Label labelValorPuntos;
-    static Label labelValorVidas;
-    Label labelValorNivel;
-    Label labelValorTiempo;
+    private static Label labelValorPuntos;
+    private static Label labelValorVidas;
+    private Label labelValorNivel;
+    private Label labelValorTiempo;
+
     public Hud(SpriteBatch batch) {
         tiempoMundo = 180;
         cuentaTiempo = 0;
@@ -39,17 +34,17 @@ public class Hud implements Disposable {
         puntos = 0;
         nivel = 1;
 
-        puerto = new FitViewport(Juego.ANCHO_V, Juego.ALTO_V, new OrthographicCamera());
+        Viewport puerto = new FitViewport(Juego.ANCHO_V, Juego.ALTO_V, new OrthographicCamera());
         escenario = new Stage(puerto, batch);
 
         Table tabla = new Table();
         tabla.top();
         tabla.setFillParent(true);
 
-        labelPuntos = new Label("PUNTOS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        labelVidas = new Label("JACK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        labelNivel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        labelTiempo = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label labelPuntos = new Label("PUNTOS", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label labelVidas = new Label("JACK", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label labelNivel = new Label("NIVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Label labelTiempo = new Label("TIEMPO", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         labelValorPuntos = new Label(String.format("%06d", puntos), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         labelValorVidas = new Label("x" + String.format("%01d", vidas), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         labelValorNivel = new Label((String.format("%01d", nivel)), new Label.LabelStyle(new BitmapFont(), Color.WHITE));

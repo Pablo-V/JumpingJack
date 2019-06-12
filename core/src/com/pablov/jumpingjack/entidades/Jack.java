@@ -21,11 +21,10 @@ public class Jack extends Sprite {
     public enum State {CAER, SALTAR, PARAR, CORRER, MORIR}
 
     public State estadoActual;
-    public State estadoAnterior;
-    public World mundo;
     public Body cuerpo;
+    private State estadoAnterior;
+    private World mundo;
     private TextureRegion jackParado;
-    private TextureRegion jackMuerto;
     private Animation<TextureRegion> jackCorrer;
     private Animation<TextureRegion> jackSaltar;
     private Animation<TextureRegion> jackCaer;
@@ -68,7 +67,7 @@ public class Jack extends Sprite {
         setRegion(getFotograma(delta));
     }
 
-    public TextureRegion getFotograma(float delta) {
+    private TextureRegion getFotograma(float delta) {
         estadoActual = getEstado();
         TextureRegion region;
         switch (estadoActual) {
@@ -105,7 +104,7 @@ public class Jack extends Sprite {
         return region;
     }
 
-    public State getEstado() {
+    private State getEstado() {
         if (jackEstaMuerto)
             return State.MORIR;
         if (cuerpo.getLinearVelocity().y > 0 || (cuerpo.getLinearVelocity().y < 0 && estadoAnterior == State.SALTAR))
@@ -128,15 +127,11 @@ public class Jack extends Sprite {
         Hud.anadirVidas(-1);
     }
 
-    public boolean estaMuerto() {
-        return jackEstaMuerto;
-    }
-
     public float getTiempoEstado() {
         return tiempoEstado;
     }
 
-    public void definirJack() {
+    private void definirJack() {
         BodyDef defCuerpo = new BodyDef();
         defCuerpo.position.set(70 / Juego.PPM, 700 / Juego.PPM);
         defCuerpo.type = BodyDef.BodyType.DynamicBody;
